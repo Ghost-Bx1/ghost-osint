@@ -477,9 +477,6 @@ def _print_summary():
 
 
 def main():
-    print(BANNER)
-    print()
-
     parser = argparse.ArgumentParser(
         prog="ghost-osint",
         description="Extended OSINT Framework | By Gh0st-Bx1",
@@ -501,14 +498,25 @@ def main():
     parser.add_argument("--all", "-a", action="store_true", help="Run all modules")
     parser.add_argument("--output", "-o", help="Output JSON file")
     parser.add_argument("--timeout", type=int, default=10, help="HTTP timeout in seconds (default: 10)")
+    parser.add_argument("--proxy", help="Proxy HTTP/HTTPS (ex: http://127.0.0.1:8080)")
+    parser.add_argument("--no-banner", action="store_true", help="Suprimir banner")
     args = parser.parse_args()
 
     domain = args.target or args.domain
     run_all = args.all
 
     if not domain and not args.email and not args.ip:
+        print(BANNER)
         parser.print_help()
         sys.exit(0)
+
+    if not getattr(args, "no_banner", False):
+        print(BANNER)
+    print()
+
+    if getattr(args, "proxy", None):
+        os.environ["http_proxy"] = args.proxy
+        os.environ["https_proxy"] = args.proxy
 
     start = time.time()
 
