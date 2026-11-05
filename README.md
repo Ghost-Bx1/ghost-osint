@@ -97,6 +97,28 @@ python ghost-osint.py --target example.com --all -o osint.json
 
 ---
 
+## Roadmap
+
+Improvements planned based on analysis of theHarvester, Recon-ng, SpiderFoot and amass:
+
+| Priority | Feature | Description |
+|----------|---------|-------------|
+| High | Shodan InternetDB | For discovered IPs: open ports, CVEs, tags (malware/honeypot) - no API key required |
+| High | Wayback Machine URL harvest | Extract historical endpoints from CDX API - reveals old paths and forgotten endpoints |
+| High | Subdomain takeover detection | For each subdomain, check CNAME chain for unclaimed services (GitHub Pages, Heroku, S3, Shopify) |
+| High | URLScan.io passive lookup | Screenshots, DOM, HTTP headers, TLS info, page links for target domain - no key needed for search |
+| High | Username enumeration (Sherlock-style) | Check a handle across 50 platforms via HEAD requests using stdlib urllib (`--username HANDLE`) |
+| High | Leaky bucket enumeration | Generate name permutations + common suffixes and probe S3/GCS/Azure HEAD requests |
+| Medium | OTX AlienVault threat feed | Domain/IP threat correlation: associated IPs, malware hashes, C2 correlation - no key needed |
+| Medium | HudsonRock infostealer check | Check if domain emails appear in infostealer credential logs (cavalier API) |
+| Medium | CommonCrawl index lookup | Retrieve all indexed URLs/paths for target domain via CDX API |
+| Medium | Reverse DNS on discovered IPs | PTR lookup on every found IP to discover sibling domains (stdlib socket) |
+| Medium | Structured dork list (20+) | Generate `site:`, `inurl:`, `filetype:`, `intitle:`, `"@domain.com" -site:` combos ready to paste |
+| Medium | DNS historical records | Past A/MX/NS records via HackerTarget free API to find old IPs still responding |
+| Low | VirusTotal passive DNS | Subdomains, resolutions, reputation score (requires API key) |
+| Low | Hunter.io email finder | Professional emails with confidence score (requires API key) |
+| Low | Change tracking / diff mode | Compare two JSON outputs: classify findings as new/removed/unchanged (`--diff old.json`) |
+
 ## Notes
 
 - `--breach` requires a paid HaveIBeenPwned API key from hibp.haveibeenpwned.com
