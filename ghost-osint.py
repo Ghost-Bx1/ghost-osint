@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # ghost-osint.py - Extended OSINT Framework
 # By Gh0st-Bx1 | github.com/Ghost-Bx1
 
