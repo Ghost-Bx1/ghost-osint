@@ -1387,10 +1387,61 @@ def _print_summary():
 # Main
 # ---------------------------------------------------------------------------
 
+_OSINT_HELP = """\033[92mModulos de Dominio:\033[0m
+  \033[1m--whois\033[0m            WHOIS e lookup DNS basico
+  \033[1m--subdomains\033[0m       Brute-force de subdominios
+  \033[1m--certs\033[0m            Transparencia de certificados (crt.sh)
+  \033[1m--github\033[0m           Geracao de dorks para GitHub
+  \033[1m--paste\033[0m            Busca em Pastebin e pastes publicos
+  \033[1m--employees\033[0m        Enumeracao de funcionarios (hints)
+  \033[1m--takeover\033[0m         Deteccao de subdomain takeover
+  \033[1m--buckets\033[0m          Enumeracao de buckets S3/GCS/Azure
+  \033[1m--dns-deep\033[0m         Enumeracao DNS aprofundada (MX/TXT/SPF/DMARC)
+  \033[1m--tech\033[0m             Deteccao de tecnologias via headers e HTML
+  \033[1m--dorks\033[0m            Geracao de Google dorks para o alvo
+  \033[1m--permute\033[0m TEXT      Permutacao de dominios a partir de TEXT
+  \033[1m--wayback\033[0m          Historico Wayback Machine (URLs arquivadas)
+  \033[1m--urlscan\033[0m          Resultados recentes no urlscan.io
+
+\033[92mModulos de IP:\033[0m
+  \033[1m--asn\033[0m              Lookup ASN para IP
+  \033[1m--shodan\033[0m           Dados Shodan/InternetDB para IP
+  \033[1m--geo\033[0m              Geolocalizacao do IP
+  \033[1m--reverse-ip\033[0m       Hosts no mesmo IP (reverse IP lookup)
+
+\033[92mModulos de Usuario / Email:\033[0m
+  \033[1m--breach\033[0m           Checar email em bases de vazamentos (HIBP)
+  \033[1m--username\033[0m HANDLE   Verificar handle em redes sociais/plataformas
+  \033[1m--email-intel\033[0m      Coleta de inteligencia sobre email
+
+\033[92mOpcoes:\033[0m
+  \033[1m--target / -t\033[0m      Dominio alvo (ex: example.com)
+  \033[1m--email / -e\033[0m       Endereco de email
+  \033[1m--ip\033[0m               Endereco IP
+  \033[1m--all / -a\033[0m         Executar todos os modulos aplicaveis
+  \033[1m--output / -o\033[0m      Salvar resultado em JSON
+  \033[1m--csv\033[0m              Salvar resultado tambem em CSV
+  \033[1m--timeout\033[0m N         Timeout HTTP em segundos (padrao: 10)
+  \033[1m--proxy\033[0m            Proxy HTTP/HTTPS (ex: http://127.0.0.1:8080)
+  \033[1m--no-banner\033[0m        Suprimir banner
+
+\033[92mExemplos:\033[0m
+  python ghost-osint.py --target example.com --all
+  python ghost-osint.py --target example.com --subdomains --certs --tech
+  python ghost-osint.py --ip 1.2.3.4 --asn --geo --shodan
+  python ghost-osint.py --email user@example.com --breach --hibp-key CHAVE
+  python ghost-osint.py --username handle --output resultado.json
+  python ghost-osint.py --target example.com --all --proxy http://127.0.0.1:8080
+
+\033[2mUse: python ghost-osint.py --help  para ver todos os flags disponiveis\033[0m
+"""
+
+
 def main():
     parser = argparse.ArgumentParser(
         prog="ghost-osint",
-        description="Extended OSINT Framework v3.0.0 | By Gh0st-Bx1 | github.com/Ghost-Bx1",
+        description="Ghost-OSINT v3.0.0 - Extended OSINT Framework  |  By Gh0st-Bx1",
+        epilog=_OSINT_HELP,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("--target", "-t", help="Target domain (e.g. example.com)")
